@@ -1,0 +1,58 @@
+#include <iostream>
+#include <string>
+
+class Employee {
+private:
+    int id;
+    std::string name;
+    double baseSalary;
+    double bonus;
+
+public:
+    // Default constructor
+    Employee() {
+        id = 0;
+        name = "Unknown";
+        baseSalary = 0.0;
+        bonus = 0.0;
+    }
+
+    // Parameterized constructor
+    Employee(int empId, std::string empName, double salary, double empBonus) {
+        id = empId;
+        name = empName;
+        baseSalary = salary;
+        bonus = empBonus;
+    }
+
+    // Function to calculate total salary
+    double calculateTotalSalary() {
+        return baseSalary + bonus;
+    }
+
+    // Function to display employee details
+    void displayData() {
+        std::cout << "ID: " << id << "\n";
+        std::cout << "Name: " << name << "\n";
+        std::cout << "Base Salary: " << baseSalary << "\n";
+        std::cout << "Bonus: " << bonus << "\n";
+        std::cout << "Total Salary: " << calculateTotalSalary() << "\n\n";
+    }
+};
+
+int main() {
+    // Creating object using default constructor
+    Employee emp1;
+
+    // Creating object using parameterized constructor
+    Employee emp2(101, "John Doe", 50000.0, 5000.0);
+
+    // Display details for both objects
+    std::cout << "--- Employee 1 (Default Constructor) ---\n";
+    emp1.displayData();
+
+    std::cout << "--- Employee 2 (Parameterized Constructor) ---\n";
+    emp2.displayData();
+
+    return 0;
+}
