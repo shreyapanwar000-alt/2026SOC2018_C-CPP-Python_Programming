@@ -1,0 +1,40 @@
+#include <iostream>
+
+class Rectangle {
+private:
+    double length;
+    double width;
+
+public:
+    // Constructor to set initial values
+    Rectangle(double l, double w) {
+        length = l;
+        width = w;
+    }
+
+    // Function defined INSIDE class to calculate area
+    double calculateArea() {
+        return length * width;
+    }
+
+    // Function declaration (defined outside class)
+    double calculatePerimeter();
+};
+
+// Function defined OUTSIDE class using :: operator
+double Rectangle::calculatePerimeter() {
+    return 2 * (length + width);
+}
+
+int main() {
+    // Create rectangle object with length 5 and width 3
+    Rectangle r(5.0, 3.0);
+
+    // Call inside-defined function
+    std::cout << "Area: " << r.calculateArea() << std::endl;
+
+    // Call outside-defined function
+    std::cout << "Perimeter: " << r.calculatePerimeter() << std::endl;
+
+    return 0;
+}
