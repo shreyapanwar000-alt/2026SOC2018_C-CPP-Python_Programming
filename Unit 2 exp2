@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+
+class Book {
+private:
+    std::string title;
+    double price;
+
+public:
+    // Parameterized constructor
+    Book(std::string t, double p) {
+        title = t;
+        price = p;
+        std::cout << "Parameterized Constructor called for: " << title << "\n";
+    }
+
+    // Copy constructor
+    Book(const Book &b) {
+        title = b.title;
+        price = b.price;
+        std::cout << "Copy Constructor called for: " << title << "\n";
+    }
+
+    // Destructor
+    ~Book() {
+        std::cout << "Destructor called for: " << title << "\n";
+    }
+
+    // Function to display book details
+    void display() {
+        std::cout << "Title: " << title << ", Price: " << price << "\n";
+    }
+};
+
+int main() {
+    std::cout << "--- Creating Object 1 ---\n";
+    // Calls parameterized constructor
+    Book b1("C++ Programming", 450.50);
+    b1.display();
+
+    std::cout << "\n--- Creating Object 2 (Copy of Object 1) ---\n";
+    // Calls copy constructor
+    Book b2 = b1;
+    b2.display();
+
+    std::cout << "\n--- Exiting Main (Objects will be destroyed) ---\n";
+    // Destructors called automatically in reverse order of object creation when main ends
+    return 0;
+}
