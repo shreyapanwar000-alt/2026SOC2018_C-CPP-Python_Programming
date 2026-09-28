@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+
+class Product {
+private:
+    int id;
+    std::string name;
+    double price;
+    int monthlySales[12]; // Stores sales for each month
+
+public:
+    // Function to input details for a product
+    void inputData() {
+        std::cout << "Enter Product ID: ";
+        std::cin >> id;
+        std::cout << "Enter Product Name: ";
+        std::cin.ignore();
+        std::getline(std::cin, name);
+        std::cout << "Enter Price: ";
+        std::cin >> price;
+
+        // Loop to get 12 months of sales data
+        std::cout << "Enter sales for 12 months:\n";
+        for (int i = 0; i < 12; i++) {
+            std::cout << "Month " << (i + 1) << ": ";
+            std::cin >> monthlySales[i];
+        }
+    }
+
+    // Function to calculate total quantity sold across 12 months
+    int calculateTotalQuantity() {
+        int total = 0;
+        for (int i = 0; i < 12; i++) {
+            total += monthlySales[i];
+        }
+        return total;
+    }
+
+    // Function to calculate total bill (total items * price per item)
+    double calculateTotalBill() {
+        return calculateTotalQuantity() * price;
+    }
+
+    // Function to display details, total quantity, and total bill
+    void displayData() {
+        std::cout << "\nID: " << id << "\n";
+        std::cout << "Name: " << name << "\n";
+        std::cout << "Price: " << price << "\n";
+        std::cout << "Total Quantity Sold: " << calculateTotalQuantity() << "\n";
+        std::cout << "Total Bill: " << calculateTotalBill() << "\n";
+    }
+};
+
+int main() {
+    int count;
+
+    std::cout << "Enter number of products: ";
+    std::cin >> count;
+
+    // Array of objects
+    Product products[100];
+
+    // Read input for each object in array
+    for (int i = 0; i < count; i++) {
+        std::cout << "\nProduct " << (i + 1) << " Details:\n";
+        products[i].inputData();
+    }
+
+    // Display output for each object in array
+    std::cout << "\n--- Output ---\n";
+    for (int i = 0; i < count; i++) {
+        products[i].displayData();
+    }
+
+    return 0;
+}
