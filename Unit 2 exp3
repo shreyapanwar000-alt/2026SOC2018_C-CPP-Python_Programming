@@ -1,0 +1,63 @@
+#include <iostream>
+
+class TargetClass; // Forward declaration for FriendClass
+
+class Sample {
+private:
+    int privateData;
+    static int count; // Static data member declaration
+
+public:
+    Sample(int val) {
+        privateData = val;
+        count++; // Increment count when object is created
+    }
+
+    // Static member function (can only access static members directly)
+    static void showCount() {
+        std::cout << "Total objects created (Static Function): " << count << "\n";
+    }
+
+    // Friend function declaration
+    friend void friendFunction(Sample s);
+
+    // Friend class declaration
+    friend class FriendClass;
+};
+
+// Static data member definition outside class
+int Sample::count = 0;
+
+// Friend function definition (not a member function, but can access privateData)
+void friendFunction(Sample s) {
+    std::cout << "Friend Function accessing privateData: " << s.privateData << "\n";
+}
+
+// Friend class definition (can access private members of Sample class)
+class FriendClass {
+public:
+    void displaySamplePrivate(Sample s) {
+        std::cout << "Friend Class accessing privateData: " << s.privateData << "\n";
+    }
+};
+
+int main() {
+    // Calling static member function before object creation
+    Sample::showCount();
+
+    // Creating objects
+    Sample obj1(10);
+    Sample obj2(20);
+
+    // Static member function call
+    Sample::showCount();
+
+    // Calling friend function
+    friendFunction(obj1);
+
+    // Using friend class
+    FriendClass fc;
+    fc.displaySamplePrivate(obj2);
+
+    return 0;
+}
